@@ -7,7 +7,7 @@ from dotenv import load_dotenv
 load_dotenv('.env-dev')
 
 
-logging.basicConfig(filename='logs.log', filemode='w')
+logging.basicConfig(filename='logs.log', filemode='a')
 
 
 DEFAULT_HANDLER = logging.StreamHandler()
