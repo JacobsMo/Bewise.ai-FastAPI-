@@ -27,3 +27,7 @@ class RequestAPIError(Exception):
 
     def __str__(self):
         return f'При запросе к внешнему API произошла ошибка: {self.__exception}!'
+    
+    @property
+    def exception(self) -> Exception:
+        return self.__exception

@@ -31,7 +31,7 @@ async def _request_api(questions_count: int) -> list:
     return json_questions
 
 
-async def _check_unique_question(question_count: int, questions_length: int) -> int:
+def _check_unique_question(question_count: int, questions_length: int) -> int:
     difference = question_count - questions_length
     return difference
 
@@ -58,7 +58,7 @@ async def add_question(questions_count: int) -> _T:
                     answer=json.get('answer'),
                 )
                 session.add(question)
-                questions.append((int(json.get('id')), str(json.get('question')).strip('\\')))
+                questions.append((int(json.get('id')), str(json.get('question')).replace('&', '').replace('\"', '')))
             except Exception as ex:
                 session.rollback()
                 logger.error(f'При записе вопроса в базу данных произошла ошибка: {ex}!')
@@ -73,7 +73,8 @@ async def add_question(questions_count: int) -> _T:
         raise CommitQuestionError(ex)
     
     difference = _check_unique_question(questions_count, len(questions))
+    logger.debug(f'difference: {difference}')
     if difference:
-        question += await add_question(difference)
+        questions += await add_question(difference)
 
-    return question
+    return questions

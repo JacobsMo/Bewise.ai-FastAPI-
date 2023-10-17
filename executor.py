@@ -7,7 +7,7 @@ from pydantic import ValidationError
 
 from config import DEFAULT_HANDLER, SERVER_HOST, SERVER_PORT, SERVER_DEBUG
 from quiz.views import quiz_router
-from quiz.exceptions import CommitQuestionError, CreateQuestionError
+from quiz.exceptions import CommitQuestionError, CreateQuestionError, RequestAPIError
 
 
 logger = logging.getLogger(__name__)
@@ -47,6 +47,18 @@ async def commit_question_error_handler(request: Request, exception: CommitQuest
 @fastapi_application.exception_handler(CreateQuestionError)
 async def create_question_error_handler(request: Request, exception: CreateQuestionError) -> Response:
     return response_error_500_http
+
+
+@fastapi_application.exception_handler(RequestAPIError)
+async def request_api_error(reqest: Request, exception: RequestAPIError) -> Response:
+    return JSONResponse(
+        status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+        content={
+            'type': 'Error',
+            'message': exception,
+            'details': exception.exception
+        }
+    )
 
 
 if __name__ == '__main__':
