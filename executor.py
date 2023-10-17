@@ -59,8 +59,3 @@ async def request_api_error(reqest: Request, exception: RequestAPIError) -> Resp
             'details': exception.exception
         }
     )
-
-
-if __name__ == '__main__':
-    logger.debug('Server is start')
-    uvicorn.run(app='executor:fastapi_application', host=SERVER_HOST, port=SERVER_PORT, reload=SERVER_DEBUG)
