@@ -4,7 +4,7 @@ import logging
 from dotenv import load_dotenv
 
 
-load_dotenv('.env-dev')
+load_dotenv('.env-prod')
 
 
 logging.basicConfig(filename='logs.log', filemode='a')
@@ -16,8 +16,6 @@ FORMAT = logging.Formatter('[%(asctime)s - %(name)s(%(levelname)s)]: %(message)s
 DEFAULT_HANDLER.setFormatter(FORMAT)
 
 
-SERVER_HOST = os.getenv('SERVER_HOST')
-SERVER_PORT = int(os.getenv('SERVER_PORT'))
 SERVER_DEBUG = False if str(os.getenv('SERVER_DEBUG')).lower() == 'false' else True
 
 

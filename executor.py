@@ -5,7 +5,7 @@ from fastapi import FastAPI, Request, Response, status
 from fastapi.responses import JSONResponse
 from pydantic import ValidationError
 
-from config import DEFAULT_HANDLER, SERVER_HOST, SERVER_PORT, SERVER_DEBUG
+from config import DEFAULT_HANDLER, SERVER_DEBUG
 from quiz.views import quiz_router
 from quiz.exceptions import CommitQuestionError, CreateQuestionError, RequestAPIError
 
