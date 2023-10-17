@@ -1,5 +1,5 @@
 Процесс сборки проекта:
-    1. Скопируйте себе на хост: git clone <Ссылка на репозиторий>.
+    1. Скопируйте себе на хост: git clone https://github.com/JacobsMo/Bewise.ai-FastAPI-.git.
     2. Перейдите в корневую папку проекта.
     3. Соберите сервисные образы: docker compose build.
     4. Соберите и запустите контейнеры: docker compose up -d.
