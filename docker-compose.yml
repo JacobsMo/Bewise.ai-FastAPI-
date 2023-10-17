@@ -8,6 +8,9 @@ services:
     ports:
       - 8090:5432
     restart: unless-stopped
+    volumes:
+      - postgresql_prod_data:/var/lib/postgresql/data/
+
   app:
     build:
       context: .
@@ -20,7 +23,6 @@ services:
     restart: unless-stopped
     depends_on:
       - database
-networks:
-  default:
-    driver: bridge
-    name: webnet
+
+volumes:
+  postgresql_prod_data: null
